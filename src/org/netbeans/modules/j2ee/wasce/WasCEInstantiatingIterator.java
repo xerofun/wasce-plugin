@@ -22,6 +22,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeListener;
 import net.sourceforge.nbgeronimo.GeronimoURIManager;
+import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceCreationException;
 import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceProperties;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
@@ -66,42 +67,42 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
         return NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_InstallerName");
     }
 
-    public Set instantiate()  {
-//           Set result = new HashSet();       
-//           String displayName = getDisplayName();
-//           
+    public Set instantiate() throws InstanceCreationException  {
+           Set result = new HashSet();       
+           String displayName = getDisplayName();
+           
 //           String url         =  "deployer:geronimo:jmx:rmi:///jndi/rmi://" +current().getComponent().getHost() + ":" + current().getComponent().getPort() + "/JMXConnector" ;// NOI18N
 //           String username    = current().getComponent().getUser(); // NOI18N
 //           String password    = current().getComponent().getPwd(); // NOI18N
 //           String httpportnumber=current().getComponent().getPort();
-//           
-//           try {
-//              System.out.println("Instance property");
-//               InstanceProperties ip =GeronimoURIManager.createInstanceProperties(current().getComponent().getHost(), current().getComponent().getPort(), current().getComponent().getUser(), current().getComponent().getPwd(), displayName);
-//               System.out.println("Sem erro");
-//               result.add(ip);
+           
+           //try {
+              System.out.println("Instance property");
+               InstanceProperties ip =GeronimoURIManager.createInstanceProperties(current().getComponent().getHost(), current().getComponent().getPort(), current().getComponent().getUser(), current().getComponent().getPwd(), displayName);
+               System.out.println("Sem erro");
+               result.add(ip);
 //           } catch (Exception ex) {
 //               System.out.println("teste "+ex.getMessage());
 //               DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(
 //                        NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_CreateFailed", displayName),
 //                        NotifyDescriptor.ERROR_MESSAGE));
 //           }
-//           return result;
-         Set result = new HashSet();       
-           String displayName = getDisplayName();
-           String url         = "deployer:myserver:localhost:8080"; // NOI18N
-           String username    = "username"; // NOI18N
-           String password    = "password"; // NOI18N
-           try {
-               InstanceProperties ip = InstanceProperties.createInstanceProperties(
-                       url, username, password, displayName);
-               result.add(ip);
-           } catch (Exception ex) {
-               DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(
-                        NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_CreateFailed", displayName),
-                        NotifyDescriptor.ERROR_MESSAGE));
-           }
            return result;
+//         Set result = new HashSet();       
+//           String displayName = getDisplayName();
+//           String url         = "deployer:myserver:localhost:808"; // NOI18N
+//           String username    = "username"; // NOI18N
+//           String password    = "password"; // NOI18N
+//          try {
+//               InstanceProperties ip = InstanceProperties.createInstanceProperties(
+//                       url, username, password, displayName);
+//            boolean add = result.add(ip);
+//           } catch (Exception ex) {
+//               DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(
+//                        NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_CreateFailed", displayName),
+//                        NotifyDescriptor.ERROR_MESSAGE));
+//           }
+//           return result;
     }
 
     public boolean hasPrevious() {
@@ -114,19 +115,7 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
 
     public WasCEWizardPanel current() {
         if (panel == null) {
-                panel = new WasCEWizardPanel();
-                
-                JComponent jc = (JComponent) panel.getComponent();
-                    // Sets step number of a component
-                    jc.putClientProperty("WizardPanel_contentSelectedIndex", 1);
-                    // Sets steps names for a panel
-                    jc.putClientProperty("WizardPanel_contentData", new String[]{"Install WebSphere CE"});
-                    // Turn on subtitle creation on each step
-                    jc.putClientProperty("WizardPanel_autoWizardStyle", true);
-                    // Show steps on the left side with the image on the background
-                    jc.putClientProperty("WizardPanel_contentDisplayed", Boolean.TRUE);
-                    // Turn on numbering of all steps
-                    jc.putClientProperty("WizardPanel_contentNumbered", Boolean.TRUE);
+                panel = new WasCEWizardPanel();                
             }
             return panel;
 

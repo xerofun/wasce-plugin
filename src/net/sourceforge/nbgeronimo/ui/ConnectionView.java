@@ -41,7 +41,8 @@
 
 package net.sourceforge.nbgeronimo.ui;
 
-import net.sourceforge.nbgeronimo.GeronimoDeploymentManager;
+import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
+
 
 /**
  *

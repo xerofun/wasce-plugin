@@ -46,7 +46,9 @@ import org.netbeans.modules.j2ee.deployment.plugins.spi.FindJSPServlet;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.IncrementalDeployment;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.OptionalDeploymentManagerFactory;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.StartServer;
-import net.sourceforge.nbgeronimo.GeronimoDeploymentManager;
+import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
+import org.netbeans.modules.j2ee.wasce.WasCEInstantiatingIterator;
+import org.openide.WizardDescriptor.InstantiatingIterator;
 
 /**
  *
@@ -69,4 +71,8 @@ public class OptionalFactory extends OptionalDeploymentManagerFactory {
         return null ;
     }
 
+     public InstantiatingIterator getAddInstanceIterator() {
+        
+        return new WasCEInstantiatingIterator();
+    }
 }

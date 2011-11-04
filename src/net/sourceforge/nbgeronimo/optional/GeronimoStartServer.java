@@ -55,10 +55,10 @@ import javax.enterprise.deploy.spi.Target;
 import javax.enterprise.deploy.spi.status.ProgressObject;
 import org.netbeans.modules.j2ee.deployment.plugins.api.ServerDebugInfo;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.StartServer;
+import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
+import org.netbeans.modules.j2ee.wasce.GeronimoUtils;
 import org.openide.util.NbBundle;
 import org.openide.util.RequestProcessor;
-import net.sourceforge.nbgeronimo.GeronimoUtils;
-import net.sourceforge.nbgeronimo.GeronimoDeploymentManager;
 
 /**
  *

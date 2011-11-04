@@ -56,8 +56,8 @@ import org.netbeans.modules.j2ee.deployment.plugins.spi.J2eePlatformImpl;
 import org.openide.filesystems.FileUtil;
 import org.openide.util.NbBundle;
 import org.openide.util.Utilities;
-import net.sourceforge.nbgeronimo.GeronimoDeploymentManager;
 import org.netbeans.api.java.platform.JavaPlatform;
+import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
 import org.netbeans.spi.project.libraries.LibraryImplementation;
 
 /**

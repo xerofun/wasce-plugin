@@ -49,8 +49,9 @@ import javax.enterprise.deploy.spi.DConfigBeanRoot;
 import javax.enterprise.deploy.spi.DeploymentConfiguration;
 import javax.enterprise.deploy.spi.exceptions.BeanNotFoundException;
 import javax.enterprise.deploy.spi.exceptions.ConfigurationException;
-import net.sourceforge.nbgeronimo.GeronimoClassLoader;
-import net.sourceforge.nbgeronimo.GeronimoDeploymentManager;
+import org.netbeans.modules.j2ee.wasce.GeronimoClassLoader;
+import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
+
 
 /**
  *

@@ -39,7 +39,7 @@
  * made subject to such option by the copyright holder.
  */
 
-package net.sourceforge.nbgeronimo;
+package org.netbeans.modules.j2ee.wasce;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,9 +60,9 @@ import javax.enterprise.deploy.spi.exceptions.InvalidModuleException;
 import javax.enterprise.deploy.spi.exceptions.TargetException;
 import javax.enterprise.deploy.spi.factories.DeploymentFactory;
 import javax.enterprise.deploy.spi.status.ProgressObject;
+import net.sourceforge.nbgeronimo.config.GeronimoDeploymentConfiguration;
 import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceProperties;
 import org.openide.util.NbBundle;
-import net.sourceforge.nbgeronimo.config.GeronimoDeploymentConfiguration;
 
 /**
  *

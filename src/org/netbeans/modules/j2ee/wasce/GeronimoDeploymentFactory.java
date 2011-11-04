@@ -39,7 +39,7 @@
  * made subject to such option by the copyright holder.
  */
 
-package net.sourceforge.nbgeronimo;
+package org.netbeans.modules.j2ee.wasce;
 
 import javax.enterprise.deploy.spi.DeploymentManager;
 import javax.enterprise.deploy.spi.exceptions.DeploymentManagerCreationException;
@@ -96,7 +96,7 @@ public class GeronimoDeploymentFactory implements DeploymentFactory
 
     public String getDisplayName() {
         return NbBundle.getMessage(GeronimoDeploymentFactory.class,
-                "TXT_displayName") ;
+                "TXT_DisplayName") ;
     }
 
     public String getProductVersion() {

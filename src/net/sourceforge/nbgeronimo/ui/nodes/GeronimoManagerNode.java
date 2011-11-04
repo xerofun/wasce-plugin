@@ -53,9 +53,10 @@ import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.NbBundle;
 import org.openide.util.Utilities;
-import net.sourceforge.nbgeronimo.GeronimoDeploymentFactory;
-import net.sourceforge.nbgeronimo.GeronimoDeploymentManager;
+
 import net.sourceforge.nbgeronimo.ui.nodes.editors.GeronimoPasswordEditor;
+import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentFactory;
+import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
 import org.openide.util.Lookup;
 
 /**

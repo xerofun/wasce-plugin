@@ -24,6 +24,15 @@ public class InstallServerPanel extends javax.swing.JPanel {
      private JFileChooser chooser;  
     /** Creates new form InstallServerPanel */
     public InstallServerPanel() {
+        putClientProperty("WizardPanel_contentSelectedIndex", 1);
+                    // Sets steps names for a panel
+                    putClientProperty("WizardPanel_contentData", new String[]{"Install WebSphere CE"});
+                    // Turn on subtitle creation on each step
+                   putClientProperty("WizardPanel_autoWizardStyle", true);
+                    // Show steps on the left side with the image on the background
+                   putClientProperty("WizardPanel_contentDisplayed", Boolean.TRUE);
+                    // Turn on numbering of all steps
+                    putClientProperty("WizardPanel_contentNumbered", Boolean.TRUE);
         initComponents();
         chooser = new JFileChooser();
         setName("Wizard Websphere Community Edition");

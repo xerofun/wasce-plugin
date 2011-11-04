@@ -45,7 +45,7 @@ import java.util.WeakHashMap;
 import javax.enterprise.deploy.spi.DeploymentManager;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.J2eePlatformFactory;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.J2eePlatformImpl;
-import net.sourceforge.nbgeronimo.GeronimoDeploymentManager;
+import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
 
 /**
  *
