@@ -69,13 +69,14 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
            Set result = new HashSet();       
            String displayName = getDisplayName();
            String url         = "deployer:wasce:localhost:8080"; // NOI18N
-           String username    = "username"; // NOI18N
-           String password    = "password"; // NOI18N
+           String username    = "system"; // NOI18N
+           String password    = "manager"; // NOI18N
            try {
                InstanceProperties ip = InstanceProperties.createInstanceProperties(
                        url, username, password, displayName);
                result.add(ip);
            } catch (Exception ex) {
+               System.out.println(ex.getMessage());
                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(
                         NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_CreateFailed", displayName),
                         NotifyDescriptor.ERROR_MESSAGE));
