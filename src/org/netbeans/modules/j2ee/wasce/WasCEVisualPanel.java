@@ -33,10 +33,10 @@ public final class WasCEVisualPanel extends JPanel  {
     
    
 
-//    @Override
-//    public String getName() {
-//        return "Wizard Websphere Community Edition";
-//    }
+    @Override
+    public String getName() {
+        return "Wizard Websphere Community Edition";
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

@@ -65,23 +65,24 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
         return NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_InstallerName");
     }
 
-    public Set instantiate() throws IOException {
-           Set result = new HashSet();       
-           String displayName = getDisplayName();
-           String url         = "deployer:wasce:localhost:8080"; // NOI18N
-           String username    = "system"; // NOI18N
-           String password    = "manager"; // NOI18N
-           try {
-               InstanceProperties ip = InstanceProperties.createInstanceProperties(
-                       url, username, password, displayName);
-               result.add(ip);
-           } catch (Exception ex) {
-               System.out.println(ex.getMessage());
-               DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(
-                        NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_CreateFailed", displayName),
-                        NotifyDescriptor.ERROR_MESSAGE));
-           }
-           return result;
+    public Set instantiate()  {
+//           Set result = new HashSet();       
+//           String displayName = getDisplayName();
+//           String url         = "deployer:wasce:localhost:8080"; // NOI18N
+//           String username    = "system"; // NOI18N
+//           String password    = "manager"; // NOI18N
+//           try {
+//               InstanceProperties ip = InstanceProperties.createInstanceProperties(
+//                       url, username, password, displayName);
+//               result.add(ip);
+//           } catch (Exception ex) {
+//               System.out.println("teste "+ex.getMessage());
+//               DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(
+//                        NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_CreateFailed", displayName),
+//                        NotifyDescriptor.ERROR_MESSAGE));
+//           }
+           //return result;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public boolean hasPrevious() {
@@ -101,7 +102,7 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
                     // Sets steps names for a panel
                     jc.putClientProperty("WizardPanel_contentData", new String[]{"Install WebSphere CE"});
                     // Turn on subtitle creation on each step
-                    jc.putClientProperty("WizardPanel_autoWizardStyle", false);
+                    jc.putClientProperty("WizardPanel_autoWizardStyle", true);
                     // Show steps on the left side with the image on the background
                     jc.putClientProperty("WizardPanel_contentDisplayed", Boolean.TRUE);
                     // Turn on numbering of all steps
