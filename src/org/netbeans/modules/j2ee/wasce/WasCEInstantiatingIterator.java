@@ -115,6 +115,7 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
     public WasCEWizardPanel current() {
         if (panel == null) {
                 panel = new WasCEWizardPanel();
+                
                 JComponent jc = (JComponent) panel.getComponent();
                     // Sets step number of a component
                     jc.putClientProperty("WizardPanel_contentSelectedIndex", 1);

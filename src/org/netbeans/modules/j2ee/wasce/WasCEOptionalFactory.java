@@ -36,6 +36,7 @@ public class WasCEOptionalFactory extends OptionalDeploymentManagerFactory {
     }
     
     public InstantiatingIterator getAddInstanceIterator() {
+        
         return new WasCEInstantiatingIterator();
     }
     

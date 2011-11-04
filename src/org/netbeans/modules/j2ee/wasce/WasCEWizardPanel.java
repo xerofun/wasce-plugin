@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.openide.WizardDescriptor;
@@ -26,19 +27,16 @@ public class WasCEWizardPanel implements WizardDescriptor.Panel {
      * The visual component that displays this panel. If you need to access the
      * component from this class, just use getComponent().
      */
-    private WasCEVisualPanel component;
+    //private WasCEVisualPanel component;
 private List<ChangeListener> listeners =
             Collections.synchronizedList(new LinkedList<ChangeListener>());
     // Get the visual component for the panel. In this template, the component
     // is kept separate. This can be more efficient: if the wizard is created
     // but never displayed, or not all panels are displayed, it is better to
     // create only those which really need to be visible.
-    public WasCEVisualPanel getComponent() {
-        if (component == null) {
-            component = new WasCEVisualPanel();
-           
-        }
-        return component;
+    public Component getComponent() {
+         //JPanel panel = new InstallServerPanel();
+        return new WasCEVisualPanel() ;
     }
     
     
