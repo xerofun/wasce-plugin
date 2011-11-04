@@ -79,7 +79,7 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
 //                        NotifyDescriptor.ERROR_MESSAGE));
 //           }
 //           return result;
-        return null ;
+       throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public boolean hasPrevious() {
@@ -110,9 +110,9 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
         return null;
     }
     
-    private String getDisplayName() {
-        return (String)wizard.getProperty(PROP_DISPLAY_NAME);
-    }
+//    private String getDisplayName() {
+//        return (String)wizard.getProperty(PROP_DISPLAY_NAME);
+//    }
     
     
 }

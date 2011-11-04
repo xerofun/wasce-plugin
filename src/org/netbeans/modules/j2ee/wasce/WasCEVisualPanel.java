@@ -24,6 +24,7 @@ public final class WasCEVisualPanel extends JPanel implements WizardDescriptor.P
     private JFileChooser chooser;  
      private transient WasCEInstantiatingIterator instantiatingIterator;
     private transient WizardDescriptor wizardDescriptor;
+    
     private List<ChangeListener> listeners =
             Collections.synchronizedList(new LinkedList<ChangeListener>());
     
@@ -68,10 +69,10 @@ public final class WasCEVisualPanel extends JPanel implements WizardDescriptor.P
         jTextField3.addKeyListener(new KeyListener());
     }
 
-    @Override
-    public String getName() {
-        return "Wizard Websphere Community Edition";
-    }
+//    @Override
+//    public String getName() {
+//        return "Wizard Websphere Community Edition";
+//    }
 
     /** This method is called from within the constructor to
      * initialize the form.
