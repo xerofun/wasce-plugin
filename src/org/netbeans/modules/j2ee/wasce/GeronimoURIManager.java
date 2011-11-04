@@ -39,8 +39,9 @@
  * made subject to such option by the copyright holder.
  */
 
-package net.sourceforge.nbgeronimo;
+package org.netbeans.modules.j2ee.wasce;
 
+import java.util.Map;
 import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceCreationException;
 import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceProperties;
 
@@ -62,9 +63,21 @@ public class GeronimoURIManager {
             String port, String user, String password, String displayName)
             throws InstanceCreationException
     {
+        
         return InstanceProperties.createInstanceProperties(
                 "deployer:geronimo:jmx:rmi:///jndi/rmi://" +
                 host + ":" + port + "/JMXConnector",
                 user, password, displayName) ;
+    }
+    
+    public static InstanceProperties createInstanceProperties(String host,
+            String port, String user, String password, String displayName,Map<String, String> initialProperties)
+            throws InstanceCreationException
+    {
+        
+        return InstanceProperties.createInstanceProperties(
+                "deployer:geronimo:jmx:rmi:///jndi/rmi://" +
+                host + ":" + port + "/JMXConnector",
+                user, password, displayName,initialProperties) ;
     }
 }

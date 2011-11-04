@@ -72,8 +72,7 @@ public class GeronimoManagerNode extends AbstractNode implements Node.Cookie {
     private static final String PASSWORD = "password" ;
     private static final String SERVER_ROOT = "serverRoot" ;
     
-    private static final String GERONIMO_ICON = "org/tempuri/nbgeronimo/" +
-            "resources/littleG.gif";
+    private static final String GERONIMO_ICON = "org/netbeans/modules/j2ee/wasce/resources/server.gif";
     
     public GeronimoManagerNode(Children children, Lookup lookup) {
         super(children) ;
@@ -81,7 +80,7 @@ public class GeronimoManagerNode extends AbstractNode implements Node.Cookie {
         this.deploymentManager = (GeronimoDeploymentManager) lookup.lookup(
                 DeploymentManager.class) ;
         
-        //getCookieSet().add(this) ;
+        getCookieSet().add(this) ;
     }
     
     @Override
@@ -224,10 +223,10 @@ public class GeronimoManagerNode extends AbstractNode implements Node.Cookie {
                         (String) value) ;
             }
             
-            @Override
-            public PropertyEditor getPropertyEditor() {
-                return new GeronimoPasswordEditor() ;
-            }
+//            @Override
+//            public PropertyEditor getPropertyEditor() {
+//                return new GeronimoPasswordEditor() ;
+//            }
         };
         properties.put(property) ;
         

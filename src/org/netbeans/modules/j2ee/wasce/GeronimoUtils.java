@@ -70,7 +70,7 @@ public final class GeronimoUtils
     }
     public static File getJSR88DeployerFile(String serverRoot)
     {
-        return new File(serverRoot + "/lib/jsr88-deploymentfactory.jar") ;
+        return new File(serverRoot + "/jsr88/geronimo-deploy-jsr88-full.jar") ;
     }
     
     public static String getDeploymentFactoryImplClassName(String serverRoot)
@@ -152,7 +152,7 @@ public final class GeronimoUtils
     public static boolean isValidGeronimoURI(String uri) {
         // Format of Geronimo URI:
         // deployer:geronimo:jmx:rmi:///jndi/rmi:[//host[:port]]/JMXConnector
-        
+        System.out.println("URI :"+uri);
         if(!uri.startsWith(GeronimoDeploymentFactory.GERONIMO_URI_START))
         {
             // URI does not begin with deployer:geronimo:jmx:rmi:///jndi/rmi:

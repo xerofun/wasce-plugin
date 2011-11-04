@@ -68,8 +68,7 @@ class GeronimoJ2eePlatformImpl extends J2eePlatformImpl {
     
     GeronimoDeploymentManager dm ;
     
-    private static final String GERONIMO_ICON = "org/tempuri/nbgeronimo/" +
-            "resources/littleG.gif";
+    private static final String GERONIMO_ICON = "org/netbeans/modules/j2ee/wasce/resources/server.gif";
     
     private static final Set SUPPORTED_SPEC_VERSIONS ;
     private static final Set SUPPORTED_JAVA_PLATFORM_VERSIONS ;

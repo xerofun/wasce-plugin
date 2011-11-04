@@ -148,7 +148,7 @@ public class GeronimoDeploymentManager implements DeploymentManager {
     }
 
     public String getHost() {
-        return getInstanceProperties().getProperty(
+         return getInstanceProperties().getProperty(
                 GeronimoDeploymentFactory.HOST_ATTR);
     }
 

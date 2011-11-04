@@ -58,6 +58,7 @@ public class OptionalFactory extends OptionalDeploymentManagerFactory {
 
     @Override
     public StartServer getStartServer(DeploymentManager dm) {
+        System.out.println("passou aqui ");
         return new GeronimoStartServer((GeronimoDeploymentManager)dm) ;
     }
 

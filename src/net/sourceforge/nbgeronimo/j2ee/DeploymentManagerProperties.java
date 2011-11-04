@@ -48,8 +48,8 @@ package net.sourceforge.nbgeronimo.j2ee;
 import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceProperties;
 import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceCreationException;
 import javax.enterprise.deploy.spi.DeploymentManager;
-import net.sourceforge.nbgeronimo.GeronimoURIManager;
 import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
+import org.netbeans.modules.j2ee.wasce.GeronimoURIManager;
 
 /**
  *

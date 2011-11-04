@@ -96,10 +96,12 @@ private List<ChangeListener> listeners =
     // WizardDescriptor.getProperty & putProperty to store information entered
     // by the user.
     public void readSettings(Object settings) {
+     
     }
 
     public void storeSettings(Object settings) {
-      
+         ((WizardDescriptor)settings).putProperty("serverRoot",component.getPath() );
+        System.out.println("Valor :"+component.getPath());        
     }
     
    
