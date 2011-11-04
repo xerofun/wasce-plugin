@@ -27,8 +27,7 @@ public final class WasCEVisualPanel extends JPanel  {
     /** Creates new form WasCEVisualPanel */
     public WasCEVisualPanel() {
         initComponents();
-        chooser = new JFileChooser();
-       
+        chooser = new JFileChooser();      
         
     }
     
