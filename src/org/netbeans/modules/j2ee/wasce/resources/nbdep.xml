@@ -1,29 +1,9 @@
 <netbeans-deployment>
 
-    <!--
-    The icon element contains a path to the icon to be used to present the server
-    in the server registry.
-    -->
     <icon>org/netbeans/modules/j2ee/wasce/resources/server</icon>
-    
-    <!--
-    The disconnected-string element contains the String parameter to DeploymentFactory.getDisconnectedDeploymentManager()
-    -->
-    <disconnected-string>deployer:wasce</disconnected-string>
-    
-    <!--
-    The container-limitation element modifies a plugin to say that not all j2ee deployments are valid.
-    For example, a web-only server would include
-    <container-limitation> <war-deploy/> </container-limitation>
-    to indicate that only war deployments are accepted.
-    If a container-limitation element is not present, all j2ee deployments are assumed valid.
-    If a container-limitation element is present, then only j2ee deployment types explicitly
-    mentioned are allowed.
-    -->
-    <container-limitation>
-        <war-deploy/>
-    </container-limitation>
-    
+ 
+    <disconnected-string>deployer:geronimo:jmx:rmi:///jndi/rmi://localhost:1099/JMXConnector</disconnected-string>
+      
     <web-context-root>
         <xpath>/</xpath>
         <prop-name>contextRoot</prop-name>

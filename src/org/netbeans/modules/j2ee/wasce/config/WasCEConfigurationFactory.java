@@ -21,9 +21,9 @@ import org.netbeans.modules.j2ee.deployment.plugins.spi.config.ModuleConfigurati
 public class WasCEConfigurationFactory implements ModuleConfigurationFactory {
     
     public ModuleConfiguration create(J2eeModule j2eeModule) throws ConfigurationException {
-        if (J2eeModule.WAR == j2eeModule.getModuleType()) {
-            return new WarDeploymentConfiguration(j2eeModule);
-        }
+//        if (J2eeModule.WAR == j2eeModule.getModuleType()) {
+//            return new WarDeploymentConfiguration(j2eeModule);
+//        }
         // TODO implement config for EAR and EJB if supported
         return null;
     }

@@ -4,16 +4,68 @@
  */
 package org.netbeans.modules.j2ee.wasce;
 
+import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileFilter;
+import org.openide.WizardDescriptor;
+import org.openide.util.HelpCtx;
 
-public final class WasCEVisualPanel extends JPanel {
-    private JFileChooser chooser;
+public final class WasCEVisualPanel extends JPanel implements WizardDescriptor.Panel {
+    private JFileChooser chooser;  
+     private transient WasCEInstantiatingIterator instantiatingIterator;
+    private transient WizardDescriptor wizardDescriptor;
+    private List<ChangeListener> listeners =
+            Collections.synchronizedList(new LinkedList<ChangeListener>());
+    
     /** Creates new form WasCEVisualPanel */
-    public WasCEVisualPanel() {
+    public WasCEVisualPanel(String[] steps, int index,
+            ChangeListener listener,
+            WasCEInstantiatingIterator instantiatingIterator) {
+        this.instantiatingIterator = instantiatingIterator;
+        
+        putClientProperty("WizardPanel_contentSelectedIndex", 1);
+//                    // Sets steps names for a panel
+        putClientProperty("WizardPanel_contentData", new String[]{"Install WebSphere CE"});
+//                    // Turn on subtitle creation on each step
+        putClientProperty("WizardPanel_autoWizardStyle", Boolean.TRUE);
+//                    // Show steps on the left side with the image on the background
+        putClientProperty("WizardPanel_contentDisplayed", Boolean.TRUE);
+//                    // Turn on numbering of all steps
+        putClientProperty("WizardPanel_contentNumbered", Boolean.TRUE);
+        
+        addChangeListener(listener);
+        setName(steps[index]);
         initComponents();
         chooser = new JFileChooser();
+        startup();
         
+    }
+    
+    private class KeyListener extends KeyAdapter {
+        @Override
+        public void keyTyped(KeyEvent event) {
+            fireChangeEvent();
+        }
+        @Override
+        public void keyReleased(KeyEvent event) {
+            fireChangeEvent();
+        }
+    };
+    
+     private void startup() {
+        jTextField1.addKeyListener(new KeyListener());
+        jTextField2.addKeyListener(new KeyListener());
+        jTextField3.addKeyListener(new KeyListener());
     }
 
     @Override
@@ -37,7 +89,7 @@ public final class WasCEVisualPanel extends JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jTextField3 = new javax.swing.JTextField();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(WasCEVisualPanel.class, "WasCEVisualPanel.jLabel1.text")); // NOI18N
 
@@ -60,7 +112,7 @@ public final class WasCEVisualPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(WasCEVisualPanel.class, "WasCEVisualPanel.jLabel4.text")); // NOI18N
 
-        jPasswordField1.setText(org.openide.util.NbBundle.getMessage(WasCEVisualPanel.class, "WasCEVisualPanel.jPasswordField1.text")); // NOI18N
+        jTextField3.setText(org.openide.util.NbBundle.getMessage(WasCEVisualPanel.class, "WasCEVisualPanel.jTextField3.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,7 +127,6 @@ public final class WasCEVisualPanel extends JPanel {
                         .addContainerGap(185, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -84,9 +135,12 @@ public final class WasCEVisualPanel extends JPanel {
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
@@ -104,17 +158,19 @@ public final class WasCEVisualPanel extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addContainerGap(154, Short.MAX_VALUE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        chooser.setDialogType(JFileChooser.OPEN_DIALOG);
+       chooser.setFileFilter(dirFileFilter);
+        chooser.setMultiSelectionEnabled(false);
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
         int option = chooser.showOpenDialog(this);
         
         if (option == JFileChooser.APPROVE_OPTION) {          
@@ -122,15 +178,80 @@ public final class WasCEVisualPanel extends JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+     private final FileFilter dirFileFilter = new FileFilter() {
+        public boolean accept(File file) {
+            return (file.exists() && file.isDirectory());
+        }
+        public String getDescription() {
+            return "Directories";
+        }
+    };
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public Component getComponent() {
+        return this;
+    }
+
+    @Override
+    public HelpCtx getHelp() {
+        return null ;
+    }
+
+    @Override
+    public void readSettings(Object settings) {
+        
+    }
+
+    @Override
+    public void storeSettings(Object settings) {
+        
+    }
+
+    @Override
+    public void addChangeListener(ChangeListener l) {
+        listeners.add(l);
+    }
+
+    @Override
+    public void removeChangeListener(ChangeListener l) {
+        listeners.remove(l);
+    }
+    
+    private void fireChangeEvent() {
+        fireChangeEvent(new ChangeEvent(this));
+    }
+    private void fireChangeEvent(ChangeEvent event) {
+        ChangeListener[] targetListeners;
+        synchronized(listeners) {
+            targetListeners = new ChangeListener[listeners.size()];
+            ListIterator<ChangeListener> iterator = listeners.listIterator();
+            
+            for(int i = 0; i < targetListeners.length; i++) {
+                if(iterator.hasNext()) {
+                    targetListeners[i] = iterator.next();
+                } else {
+                    break;
+                }
+            }
+        }
+        
+        for(int i = 0; i < targetListeners.length; i++) {
+            ChangeListener listener = targetListeners[i];
+            if(listener != null) {
+                listener.stateChanged(event);
+            }
+        }
+    }
 }

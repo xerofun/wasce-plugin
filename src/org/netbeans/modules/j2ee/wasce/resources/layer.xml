@@ -28,15 +28,8 @@
                 <file name="ModuleConfigurationFactory.instance">
                     <attr name="instanceClass" stringvalue="org.netbeans.modules.j2ee.wasce.config.WasCEConfigurationFactory"/>
                     <attr name="instanceOf" stringvalue="org.netbeans.modules.j2ee.deployment.plugins.spi.config.ModuleConfigurationFactory"/>
-                </file>
-                
-                <folder name="DeploymentFileNames">
-                    <folder name="WAR">
-                        <file name="WEB-INF\wasce-web.xml"/>
-                    </folder>
-                </folder>
-                
-                
+                </file>                
+                             
             </folder>
         </folder>
         
