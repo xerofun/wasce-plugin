@@ -20,54 +20,19 @@ import javax.swing.filechooser.FileFilter;
 import org.openide.WizardDescriptor;
 import org.openide.util.HelpCtx;
 
-public final class WasCEVisualPanel extends JPanel implements WizardDescriptor.Panel {
+public final class WasCEVisualPanel extends JPanel  {
     private JFileChooser chooser;  
-     private transient WasCEInstantiatingIterator instantiatingIterator;
-    private transient WizardDescriptor wizardDescriptor;
     
-    private List<ChangeListener> listeners =
-            Collections.synchronizedList(new LinkedList<ChangeListener>());
-    
+  
     /** Creates new form WasCEVisualPanel */
-    public WasCEVisualPanel(String[] steps, int index,
-            ChangeListener listener,
-            WasCEInstantiatingIterator instantiatingIterator) {
-        this.instantiatingIterator = instantiatingIterator;
-        
-        putClientProperty("WizardPanel_contentSelectedIndex", 1);
-//                    // Sets steps names for a panel
-        putClientProperty("WizardPanel_contentData", new String[]{"Install WebSphere CE"});
-//                    // Turn on subtitle creation on each step
-        putClientProperty("WizardPanel_autoWizardStyle", Boolean.TRUE);
-//                    // Show steps on the left side with the image on the background
-        putClientProperty("WizardPanel_contentDisplayed", Boolean.TRUE);
-//                    // Turn on numbering of all steps
-        putClientProperty("WizardPanel_contentNumbered", Boolean.TRUE);
-        
-        addChangeListener(listener);
-        setName(steps[index]);
+    public WasCEVisualPanel() {
         initComponents();
         chooser = new JFileChooser();
-        startup();
+       
         
     }
     
-    private class KeyListener extends KeyAdapter {
-        @Override
-        public void keyTyped(KeyEvent event) {
-            fireChangeEvent();
-        }
-        @Override
-        public void keyReleased(KeyEvent event) {
-            fireChangeEvent();
-        }
-    };
-    
-     private void startup() {
-        jTextField1.addKeyListener(new KeyListener());
-        jTextField2.addKeyListener(new KeyListener());
-        jTextField3.addKeyListener(new KeyListener());
-    }
+   
 
 //    @Override
 //    public String getName() {
@@ -200,59 +165,11 @@ public final class WasCEVisualPanel extends JPanel implements WizardDescriptor.P
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public Component getComponent() {
-        return this;
-    }
+   
 
-    @Override
-    public HelpCtx getHelp() {
-        return null ;
-    }
+   
 
-    @Override
-    public void readSettings(Object settings) {
-        
-    }
-
-    @Override
-    public void storeSettings(Object settings) {
-        
-    }
-
-    @Override
-    public void addChangeListener(ChangeListener l) {
-        listeners.add(l);
-    }
-
-    @Override
-    public void removeChangeListener(ChangeListener l) {
-        listeners.remove(l);
-    }
+   
     
-    private void fireChangeEvent() {
-        fireChangeEvent(new ChangeEvent(this));
-    }
-    private void fireChangeEvent(ChangeEvent event) {
-        ChangeListener[] targetListeners;
-        synchronized(listeners) {
-            targetListeners = new ChangeListener[listeners.size()];
-            ListIterator<ChangeListener> iterator = listeners.listIterator();
-            
-            for(int i = 0; i < targetListeners.length; i++) {
-                if(iterator.hasNext()) {
-                    targetListeners[i] = iterator.next();
-                } else {
-                    break;
-                }
-            }
-        }
-        
-        for(int i = 0; i < targetListeners.length; i++) {
-            ChangeListener listener = targetListeners[i];
-            if(listener != null) {
-                listener.stateChanged(event);
-            }
-        }
-    }
+    
 }

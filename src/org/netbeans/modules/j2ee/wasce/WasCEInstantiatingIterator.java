@@ -36,131 +36,84 @@ import org.openide.util.NbBundle;
  */
 public class WasCEInstantiatingIterator implements WizardDescriptor.InstantiatingIterator {
     
-     public Set instantiate() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private final static String PROP_DISPLAY_NAME = "ServInstWizard_displayName"; // NOI18N
+
+        
+    private Panel panel;
+    private WizardDescriptor wizard;
+    
+    public void removeChangeListener(ChangeListener l) {
     }
 
-    public void initialize(WizardDescriptor wizardDescriptor) {
-        this.wizardDescriptor = wizardDescriptor;
+    public void addChangeListener(ChangeListener l) {
     }
 
-    public void uninitialize(WizardDescriptor wizardDescriptor) {
-        // do nothing unless uninitialization is required
+    public void uninitialize(WizardDescriptor wizard) {
     }
 
-    public Panel current() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public String name() {
-        return "";
-    }
-
-    public boolean hasNext() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public boolean hasPrevious() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void nextPanel() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void initialize(WizardDescriptor wizard) {
+        this.wizard = wizard;
     }
 
     public void previousPanel() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void addChangeListener(ChangeListener changeListener) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void nextPanel() {
     }
 
-    public void removeChangeListener(ChangeListener changeListener) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String name() {
+        return NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_InstallerName");
+    }
+
+    public Set instantiate() throws IOException {
+           Set result = new HashSet();       
+           String displayName = getDisplayName();
+           String url         = "deployer:wasce:localhost:8080"; // NOI18N
+           String username    = "username"; // NOI18N
+           String password    = "password"; // NOI18N
+           try {
+               InstanceProperties ip = InstanceProperties.createInstanceProperties(
+                       url, username, password, displayName);
+               result.add(ip);
+           } catch (Exception ex) {
+               DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(
+                        NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_CreateFailed", displayName),
+                        NotifyDescriptor.ERROR_MESSAGE));
+           }
+           return result;
+    }
+
+    public boolean hasPrevious() {
+        return false;
+    }
+
+    public boolean hasNext() {
+        return false;
+    }
+
+    public Panel current() {
+        if (panel == null) {
+                panel = new WasCEWizardPanel();
+                JComponent jc = (JComponent) panel.getComponent();
+                    // Sets step number of a component
+                    jc.putClientProperty("WizardPanel_contentSelectedIndex", 1);
+                    // Sets steps names for a panel
+                    jc.putClientProperty("WizardPanel_contentData", new String[]{"Install WebSphere CE"});
+                    // Turn on subtitle creation on each step
+                    jc.putClientProperty("WizardPanel_autoWizardStyle", Boolean.TRUE);
+                    // Show steps on the left side with the image on the background
+                    jc.putClientProperty("WizardPanel_contentDisplayed", Boolean.TRUE);
+                    // Turn on numbering of all steps
+                    jc.putClientProperty("WizardPanel_contentNumbered", Boolean.TRUE);
+            }
+            return panel;
+
     }
     
-    private WizardDescriptor wizardDescriptor;
+    private String getDisplayName() {
+        return (String)wizard.getProperty(PROP_DISPLAY_NAME);
+    }
     
     
-    
-//    private final static String PROP_DISPLAY_NAME = "ServInstWizard_displayName"; // NOI18N
-// 
-//    private WizardDescriptor wizard;
-//    
-//    public void removeChangeListener(ChangeListener l) {
-//    }
-//
-//    public void addChangeListener(ChangeListener l) {
-//    }
-//
-//    public void uninitialize(WizardDescriptor wizard) {
-//    }
-//
-//    public void initialize(WizardDescriptor wizard) {
-//        this.wizard = wizard;
-//    }
-//
-//    public void previousPanel() {
-//    }
-//
-//    public void nextPanel() {
-//    }
-//
-//    public String name() {
-//        return NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_InstallerName");
-//    }
-//
-//    public Set instantiate() throws IOException {
-//           Set result = new HashSet();       
-//           String displayName = getDisplayName();
-//           String url         = "deployer:wasce:localhost:8080"; // NOI18N
-//           String username    = "username"; // NOI18N
-//           String password    = "password"; // NOI18N
-//           try {
-//               InstanceProperties ip = InstanceProperties.createInstanceProperties(
-//                       url, username, password, displayName);
-//               result.add(ip);
-//           } catch (Exception ex) {
-//               DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(
-//                        NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_CreateFailed", displayName),
-//                        NotifyDescriptor.ERROR_MESSAGE));
-//           }
-//           return result;
-//       throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//
-//    public boolean hasPrevious() {
-//        return false;
-//    }
-//
-//    public boolean hasNext() {
-//        return false;
-//    }
-//
-//    public Panel current() {
-//        if (panel == null) {
-//                panel = new WasCEWizardPanel();
-//                JComponent jc = (JComponent) panel.getComponent();
-//                    // Sets step number of a component
-//                    jc.putClientProperty("WizardPanel_contentSelectedIndex", 1);
-//                    // Sets steps names for a panel
-//                    jc.putClientProperty("WizardPanel_contentData", new String[]{"Install WebSphere CE"});
-//                    // Turn on subtitle creation on each step
-//                    jc.putClientProperty("WizardPanel_autoWizardStyle", Boolean.TRUE);
-//                    // Show steps on the left side with the image on the background
-//                    jc.putClientProperty("WizardPanel_contentDisplayed", Boolean.TRUE);
-//                    // Turn on numbering of all steps
-//                    jc.putClientProperty("WizardPanel_contentNumbered", Boolean.TRUE);
-//            }
-//            return panel;
-//       
-//        return null;
-//    }
-//    
-//    private String getDisplayName() {
-//        return (String)wizard.getProperty(PROP_DISPLAY_NAME);
-//    }
-    
-    
+
 }
