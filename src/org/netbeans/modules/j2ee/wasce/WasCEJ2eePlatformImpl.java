@@ -41,15 +41,15 @@ public class WasCEJ2eePlatformImpl extends J2eePlatformImpl {
     public Set getSupportedSpecVersions() {
         Set result = new HashSet();
         result.add(J2eeModule.J2EE_14);
-        //result.add(J2eeModule.JAVA_EE_5);
+        result.add(J2eeModule.JAVA_EE_5);
         return result;
     }
     
     public java.util.Set getSupportedModuleTypes() {
         Set result = new HashSet();
         result.add(J2eeModule.WAR);
-        //result.add(J2eeModule.EAR);
-        //result.add(J2eeModule.EJB);
+        result.add(J2eeModule.EAR);
+        result.add(J2eeModule.EJB);
         return result;
     }
     
@@ -74,7 +74,7 @@ public class WasCEJ2eePlatformImpl extends J2eePlatformImpl {
         Set versions = new HashSet();
         versions.add("1.4"); // NOI18N
         versions.add("1.5"); // NOI18N
-        versions.add("1.6"); // NOI18N
+        //versions.add("1.6"); // NOI18N
         return versions;
     }
     
