@@ -11,25 +11,23 @@
                     <attr name="instanceClass" stringvalue="org.netbeans.modules.j2ee.wasce.GeronimoDeploymentFactory"/>
                     <attr name="instanceOf" stringvalue="javax.enterprise.deploy.spi.factories.DeploymentFactory"/>
                 </file>
-                <file name="RegistryNodeFactory.instance">
-                    <attr name="instanceClass" stringvalue="org.netbeans.modules.j2ee.wasce.nodes.WasCERegistryNodeFactory"/>
-                    <attr name="instanceOf" stringvalue="org.netbeans.modules.j2ee.deployment.plugins.spi.RegistryNodeFactory"/>
+                  <file name="RegistryNodeFactory.instance">
+                    <attr name="instanceClass" stringvalue="net.sourceforge.nbgeronimo.ui.nodes.GeronimoRegistryNodeFactory" />
+                    <attr name="instanceOf" stringvalue="org.netbeans.modules.j2ee.deployment.plugins.spi.RegistryNodeFactory" />
                 </file>
                 <file name="J2eePlatformFactory.instance">
-                    <attr name="instanceCreate" newvalue="org.netbeans.modules.j2ee.wasce.WasCEJ2eePlatformFactory"/>
-                    <attr name="instanceClass" stringvalue="org.netbeans.modules.j2ee.wasce.WasCEJ2eePlatformFactory"/>
-                    <attr name="instanceOf" stringvalue="org.netbeans.modules.j2ee.deployment.plugins.spi.J2eePlatformFactory"/>
+                    <attr name="instanceCreate" newvalue="net.sourceforge.nbgeronimo.j2ee.GeronimoJ2eePlatformFactory" />
+                    <attr name="instanceClass" stringvalue="net.sourceforge.nbgeronimo.j2ee.GeronimoJ2eePlatformFactory" />
                 </file>
-                
                 <file name="OptionalFactory.instance">
                     <attr name="instanceCreate" newvalue="net.sourceforge.nbgeronimo.optional.OptionalFactory" />
                     <attr name="instanceClass" stringvalue="net.sourceforge.nbgeronimo.optional.OptionalFactory" />
                     <attr name="instanceOf" stringvalue="org.netbeans.modules.j2ee.deployment.plugins.spi.OptionalDeploymentManagerFactory" />
                 </file>
-                <file name="ModuleConfigurationFactory.instance">
-                    <attr name="instanceClass" stringvalue="org.netbeans.modules.j2ee.wasce.config.WasCEConfigurationFactory"/>
-                    <attr name="instanceOf" stringvalue="org.netbeans.modules.j2ee.deployment.plugins.spi.config.ModuleConfigurationFactory"/>
-                </file>                
+               <file name="ModuleConfigurationFactory.Instance">
+                    <attr name="instanceClass" stringvalue="net.sourceforge.nbgeronimo.config.GeronimoModuleConfigurationFactory" />
+                    <attr name="instanceOf" stringvalue="org.netbeans.modules.j2ee.deployment.plugins.spi.config.ModuleConfigurationFactory" />
+                </file>              
                              
             </folder>
         </folder>
