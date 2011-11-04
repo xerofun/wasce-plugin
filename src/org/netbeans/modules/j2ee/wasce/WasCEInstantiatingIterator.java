@@ -36,34 +36,82 @@ import org.openide.util.NbBundle;
  */
 public class WasCEInstantiatingIterator implements WizardDescriptor.InstantiatingIterator {
     
-    private final static String PROP_DISPLAY_NAME = "ServInstWizard_displayName"; // NOI18N
- 
-    private WizardDescriptor wizard;
-    
-    public void removeChangeListener(ChangeListener l) {
+     public Set instantiate() throws IOException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void addChangeListener(ChangeListener l) {
+    public void initialize(WizardDescriptor wizardDescriptor) {
+        this.wizardDescriptor = wizardDescriptor;
     }
 
-    public void uninitialize(WizardDescriptor wizard) {
+    public void uninitialize(WizardDescriptor wizardDescriptor) {
+        // do nothing unless uninitialization is required
     }
 
-    public void initialize(WizardDescriptor wizard) {
-        this.wizard = wizard;
-    }
-
-    public void previousPanel() {
-    }
-
-    public void nextPanel() {
+    public Panel current() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public String name() {
-        return NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_InstallerName");
+        return "";
     }
 
-    public Set instantiate() throws IOException {
+    public boolean hasNext() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public boolean hasPrevious() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void nextPanel() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void previousPanel() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void addChangeListener(ChangeListener changeListener) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void removeChangeListener(ChangeListener changeListener) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    private WizardDescriptor wizardDescriptor;
+    
+    
+    
+//    private final static String PROP_DISPLAY_NAME = "ServInstWizard_displayName"; // NOI18N
+// 
+//    private WizardDescriptor wizard;
+//    
+//    public void removeChangeListener(ChangeListener l) {
+//    }
+//
+//    public void addChangeListener(ChangeListener l) {
+//    }
+//
+//    public void uninitialize(WizardDescriptor wizard) {
+//    }
+//
+//    public void initialize(WizardDescriptor wizard) {
+//        this.wizard = wizard;
+//    }
+//
+//    public void previousPanel() {
+//    }
+//
+//    public void nextPanel() {
+//    }
+//
+//    public String name() {
+//        return NbBundle.getMessage(WasCEInstantiatingIterator.class, "MSG_InstallerName");
+//    }
+//
+//    public Set instantiate() throws IOException {
 //           Set result = new HashSet();       
 //           String displayName = getDisplayName();
 //           String url         = "deployer:wasce:localhost:8080"; // NOI18N
@@ -79,18 +127,18 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
 //                        NotifyDescriptor.ERROR_MESSAGE));
 //           }
 //           return result;
-       throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public boolean hasPrevious() {
-        return false;
-    }
-
-    public boolean hasNext() {
-        return false;
-    }
-
-    public Panel current() {
+//       throw new UnsupportedOperationException("Not supported yet.");
+//    }
+//
+//    public boolean hasPrevious() {
+//        return false;
+//    }
+//
+//    public boolean hasNext() {
+//        return false;
+//    }
+//
+//    public Panel current() {
 //        if (panel == null) {
 //                panel = new WasCEWizardPanel();
 //                JComponent jc = (JComponent) panel.getComponent();
@@ -106,10 +154,10 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
 //                    jc.putClientProperty("WizardPanel_contentNumbered", Boolean.TRUE);
 //            }
 //            return panel;
-       
-        return null;
-    }
-    
+//       
+//        return null;
+//    }
+//    
 //    private String getDisplayName() {
 //        return (String)wizard.getProperty(PROP_DISPLAY_NAME);
 //    }
