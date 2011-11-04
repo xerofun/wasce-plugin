@@ -101,7 +101,7 @@ public class WasCEInstantiatingIterator implements WizardDescriptor.Instantiatin
                     // Sets steps names for a panel
                     jc.putClientProperty("WizardPanel_contentData", new String[]{"Install WebSphere CE"});
                     // Turn on subtitle creation on each step
-                    jc.putClientProperty("WizardPanel_autoWizardStyle", Boolean.TRUE);
+                    jc.putClientProperty("WizardPanel_autoWizardStyle", false);
                     // Show steps on the left side with the image on the background
                     jc.putClientProperty("WizardPanel_contentDisplayed", Boolean.TRUE);
                     // Turn on numbering of all steps
