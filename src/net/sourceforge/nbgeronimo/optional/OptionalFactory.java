@@ -71,8 +71,7 @@ public class OptionalFactory extends OptionalDeploymentManagerFactory {
         return null ;
     }
 
-     public InstantiatingIterator getAddInstanceIterator() {
-        
+     public InstantiatingIterator getAddInstanceIterator() {        
         return new WasCEInstantiatingIterator();
     }
 }
