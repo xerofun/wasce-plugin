@@ -45,6 +45,7 @@ import javax.enterprise.deploy.spi.DeploymentManager;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.FindJSPServlet;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.IncrementalDeployment;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.OptionalDeploymentManagerFactory;
+import org.netbeans.modules.j2ee.deployment.plugins.spi.ServerInitializationException;
 import org.netbeans.modules.j2ee.deployment.plugins.spi.StartServer;
 import org.netbeans.modules.j2ee.wasce.GeronimoDeploymentManager;
 import org.netbeans.modules.j2ee.wasce.WasCEInstantiatingIterator;
@@ -58,7 +59,6 @@ public class OptionalFactory extends OptionalDeploymentManagerFactory {
 
     @Override
     public StartServer getStartServer(DeploymentManager dm) {
-        System.out.println("passou aqui ");
         return new GeronimoStartServer((GeronimoDeploymentManager)dm) ;
     }
 
@@ -72,7 +72,7 @@ public class OptionalFactory extends OptionalDeploymentManagerFactory {
         return null ;
     }
 
-     public InstantiatingIterator getAddInstanceIterator() {        
+    public InstantiatingIterator getAddInstanceIterator() {        
         return new WasCEInstantiatingIterator();
     }
 }

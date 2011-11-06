@@ -39,6 +39,7 @@
  * made subject to such option by the copyright holder.
  */
 
+
 package org.netbeans.modules.j2ee.wasce;
 
 import java.io.File;
@@ -57,6 +58,10 @@ import org.openide.util.Utilities;
  *
  * @author John Platts
  */
+/**
+ * implementation by Daniel Gomes to work with Websphere 2011
+ * @since 2011
+ */
 public final class GeronimoUtils
 {
     private GeronimoUtils() {}
@@ -68,6 +73,13 @@ public final class GeronimoUtils
     {
         return GeronimoClassLoader.getInstance(serverRoot) ;
     }
+    
+    /**
+     * Changed by Daniel Gomes 2011
+     * alter lib jsr88 to get correct path to wasce
+     * @param serverRoot
+     * @return 
+     */
     public static File getJSR88DeployerFile(String serverRoot)
     {
         return new File(serverRoot + "/jsr88/geronimo-deploy-jsr88-full.jar") ;
@@ -124,6 +136,10 @@ public final class GeronimoUtils
             {
                 return null ;
             }
+        }catch(Exception ex ){
+            ex.printStackTrace();
+            ex.getMessage();
+            return null;
         }
         finally
         {
@@ -152,7 +168,6 @@ public final class GeronimoUtils
     public static boolean isValidGeronimoURI(String uri) {
         // Format of Geronimo URI:
         // deployer:geronimo:jmx:rmi:///jndi/rmi:[//host[:port]]/JMXConnector
-        System.out.println("URI :"+uri);
         if(!uri.startsWith(GeronimoDeploymentFactory.GERONIMO_URI_START))
         {
             // URI does not begin with deployer:geronimo:jmx:rmi:///jndi/rmi:

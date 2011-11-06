@@ -49,6 +49,11 @@ import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceProperties;
  *
  * @author John Platts
  */
+/**
+ * implementation by Daniel Gomes to work with Websphere 2011
+ * 
+ */
+
 public class GeronimoURIManager {
     // Format of Geronimo URI:
     // deployer:geronimo:jmx:rmi:///jndi/rmi:[//host[:port]]/JMXConnector
@@ -70,6 +75,18 @@ public class GeronimoURIManager {
                 user, password, displayName) ;
     }
     
+    /**
+     * changed by Daniel Gomes
+     * added param initialProperties to get path serverRoot param
+     * @param host
+     * @param port
+     * @param user
+     * @param password
+     * @param displayName
+     * @param initialProperties
+     * @return
+     * @throws InstanceCreationException 
+     */
     public static InstanceProperties createInstanceProperties(String host,
             String port, String user, String password, String displayName,Map<String, String> initialProperties)
             throws InstanceCreationException

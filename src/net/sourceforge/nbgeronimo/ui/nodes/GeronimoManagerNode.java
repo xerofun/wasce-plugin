@@ -41,10 +41,16 @@
 
 package net.sourceforge.nbgeronimo.ui.nodes;
 
+import java.awt.Component;
 import java.awt.Image;
+import java.awt.Label;
 import java.beans.PropertyEditor;
 import java.lang.reflect.InvocationTargetException;
 import javax.enterprise.deploy.spi.DeploymentManager;
+import javax.swing.JPanel;
+import net.sourceforge.nbgeronimo.j2ee.DeploymentManagerProperties;
+import net.sourceforge.nbgeronimo.j2ee.GeronimoJ2eePlatformFactory;
+import net.sourceforge.nbgeronimo.ui.Customizer;
 import org.netbeans.modules.j2ee.deployment.plugins.api.InstanceProperties;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
@@ -79,20 +85,41 @@ public class GeronimoManagerNode extends AbstractNode implements Node.Cookie {
         
         this.deploymentManager = (GeronimoDeploymentManager) lookup.lookup(
                 DeploymentManager.class) ;
-        
+        setIconBaseWithExtension(GERONIMO_ICON);
         getCookieSet().add(this) ;
     }
     
-    @Override
-    public Image getIcon(int type) {
-        return Utilities.loadImage(GERONIMO_ICON) ;
+    public javax.swing.Action[] getActions(boolean context) {
+        return new javax.swing.Action[]{};
+    }
+    
+     public String getShortDescription() {
+        return "http://"+deploymentManager.getHost()+":"+deploymentManager.getPort(); // NOI18N
+    }
+    public boolean hasCustomizer() {
+        return true;
     }
     
     @Override
-    public Image getOpenedIcon(int type) {
-        return Utilities.loadImage(GERONIMO_ICON) ;
-    }
+    public Component getCustomizer() {
+        GeronimoJ2eePlatformFactory j2ee = new GeronimoJ2eePlatformFactory();
+        
+        Customizer panel = new Customizer(j2ee.getJ2eePlatformImpl(deploymentManager), new DeploymentManagerProperties(deploymentManager));
+        //System.out.println("teste node customizer");
+        //panel.add(new Label("< Put your customizer implementation here! >")); // NOI18N
+        return panel;
+    } 
+//    @Override
+//    public Image getIcon(int type) {
+//        return Utilities.loadImage(GERONIMO_ICON) ;
+//    }
     
+//    @Override
+//    public Image getOpenedIcon(int type) {
+//        return Utilities.loadImage(GERONIMO_ICON) ;
+//    }
+    
+    /*
     @Override
     protected Sheet createSheet() {
         Sheet sheet = super.createSheet() ;
@@ -223,13 +250,10 @@ public class GeronimoManagerNode extends AbstractNode implements Node.Cookie {
                         (String) value) ;
             }
             
-//            @Override
-//            public PropertyEditor getPropertyEditor() {
-//                return new GeronimoPasswordEditor() ;
-//            }
         };
         properties.put(property) ;
         
         return sheet ;
     }
+    */
 }

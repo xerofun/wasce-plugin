@@ -76,6 +76,8 @@ public class GeronimoStartServer extends StartServer {
         state = STATE_STOPPED ;
         isDebug = false ;
         geronimoServerProcess = null ;
+        System.out.println("user :"+dm.getUsername());
+        System.out.println("password :"+dm.getPassword());
     }
     
     @Override
@@ -161,7 +163,7 @@ public class GeronimoStartServer extends StartServer {
                             "") ;
                     
                     state = STATE_STARTED ;
-                    
+                    System.out.println("terminou ok");
                     return ;
                 }
                 
@@ -383,6 +385,7 @@ public class GeronimoStartServer extends StartServer {
     public ServerDebugInfo getDebugInfo(Target target) {
         return null ;
     }
+    
     
     private static final int STATE_STOPPED  = 0;
     private static final int STATE_STARTING = 1;
