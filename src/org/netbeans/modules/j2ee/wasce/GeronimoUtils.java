@@ -136,11 +136,12 @@ public final class GeronimoUtils
             {
                 return null ;
             }
-        }catch(Exception ex ){
-            ex.printStackTrace();
-            ex.getMessage();
-            return null;
         }
+//catch(Exception ex ){
+//            ex.printStackTrace();
+//            ex.getMessage();
+//            return null;
+//        }
         finally
         {
             classLoader.restoreLoader();
