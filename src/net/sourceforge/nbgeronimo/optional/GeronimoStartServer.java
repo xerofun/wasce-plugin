@@ -64,6 +64,7 @@ import org.openide.util.RequestProcessor;
 /**
  *
  * @author John Platts
+ * changed by Daniel Gomes 11/2011
  */
 public class GeronimoStartServer extends StartServer {
     private GeronimoDeploymentManager dm ;
@@ -74,7 +75,15 @@ public class GeronimoStartServer extends StartServer {
     public GeronimoStartServer(GeronimoDeploymentManager dm)
     {
         this.dm = dm ;
-        state = STATE_STOPPED ;
+        //verify if server is running or not
+        // changed by Daniel gomes
+        if(isRunning()){
+            state = STATE_STARTED ;
+        }else{
+            state = STATE_STOPPED ; 
+        }
+       
+        
         isDebug = false ;
         geronimoServerProcess = null ;
         System.out.println("user :"+dm.getUsername());
@@ -148,11 +157,11 @@ public class GeronimoStartServer extends StartServer {
                     dm.getServerTitleMessage()) ;
             inputTailer.start() ;
             
-            GeronimoTailer logTailer = new GeronimoTailer(
-                    GeronimoUtils.getGeronimoLog(serverRoot),
-                    NbBundle.getMessage(GeronimoStartServer.class,
-                            "TXT_logWindowTitle", dm.getServerTitleMessage())) ;
-            logTailer.start() ;
+//            GeronimoTailer logTailer = new GeronimoTailer(
+//                    GeronimoUtils.getGeronimoLog(serverRoot),
+//                    NbBundle.getMessage(GeronimoStartServer.class,
+//                            "TXT_logWindowTitle", dm.getServerTitleMessage())) ;
+//            logTailer.start() ;
             
             geronimoServerProcess = process ;
             
@@ -165,7 +174,8 @@ public class GeronimoStartServer extends StartServer {
                 else
                 {
                   //  serverProgress.notifyStart(StateType.COMPLETED,                            "") ;
-                    fireStateChange(StateType.COMPLETED, "MSG_ServerStarted");                    state = STATE_STARTED ;
+                    fireStateChange(StateType.COMPLETED, "MSG_ServerStarted");                    
+                    state = STATE_STARTED ;
                     System.out.println("terminou ok");
                     return ;
                 }
@@ -266,7 +276,7 @@ public class GeronimoStartServer extends StartServer {
             
             ProcessBuilder processBuilder =
                     new ProcessBuilder(commandFile.getAbsolutePath(),
-                    "stop") ;
+                    "stop","-u",dm.getUsername(),"-p",dm.getPassword()) ;
             
             Map<String, String> geronimoEnvironment = processBuilder.environment() ;
             
@@ -284,11 +294,11 @@ public class GeronimoStartServer extends StartServer {
             
              GeronimoTailer inputTailer = new GeronimoTailer(process.getInputStream(),dm.getServerTitleMessage()) ;
             inputTailer.start() ;
-            GeronimoTailer logTailer = new GeronimoTailer(
-                    GeronimoUtils.getGeronimoLog(serverRoot),
-                    NbBundle.getMessage(GeronimoStartServer.class,
-                            "TXT_logWindowTitle", dm.getServerTitleMessage())) ;
-            logTailer.start() ;
+//            GeronimoTailer logTailer = new GeronimoTailer(
+//                    GeronimoUtils.getGeronimoLog(serverRoot),
+//                    NbBundle.getMessage(GeronimoStartServer.class,
+//                            "TXT_logWindowTitle", dm.getServerTitleMessage())) ;
+//            logTailer.start() ;
             geronimoServerProcess = process ;
             
             while(System.currentTimeMillis() - start < STOP_TIMEOUT) {
@@ -315,7 +325,7 @@ public class GeronimoStartServer extends StartServer {
             fireStateChange(StateType.FAILED, "MSG_StoptServerTimeout");
             process.destroy();
             
-            state = STATE_STARTED;
+            state = STATE_STOPPED;
         }
         private void fireStateChange(StateType stateType, String msgKey, String... msgParams) {
             InstanceProperties ip = dm.getInstanceProperties();
@@ -352,10 +362,19 @@ public class GeronimoStartServer extends StartServer {
             }
         }
         
+        /**
+         * changed by Daniel Gomes, 07/2011
+         */
         if(state == STATE_STOPPING || state == STATE_STOPPED) {
-            
+             String m = NbBundle.getMessage(GeronimoStartServer.class, "MSG_ServerStopped", dm.getServerName());
+            serverProgress.changeState(StateType.COMPLETED,  m);
+            return serverProgress ;
         }
         
+        RequestProcessor.getDefault().post(new GeronimoStopRunnable(serverProgress),
+                0, Thread.NORM_PRIORITY) ;
+        
+        state = STATE_STOPPING;
         return serverProgress;
     }
 

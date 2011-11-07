@@ -528,8 +528,14 @@ public class GeronimoDeploymentManager implements DeploymentManager {
 
     public void release() {
         if (dm != null) {
-            dm.release();
-            dm = null;
+            try{
+                
+               dm.release(); 
+            }catch(IllegalStateException e){               
+            }
+            finally{
+                dm = null;
+            }
         }
     }
 

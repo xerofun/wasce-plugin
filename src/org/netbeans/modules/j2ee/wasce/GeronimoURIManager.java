@@ -60,19 +60,14 @@ public class GeronimoURIManager {
     
     public static InstanceProperties getInstanceProperties(String host, String port)
     {
-        return InstanceProperties.getInstanceProperties(
-                "deployer:geronimo:jmx:rmi:///jndi/rmi://" +
-                host + ":" + port + "/JMXConnector" ) ;
+        return InstanceProperties.getInstanceProperties( "deployer:geronimo:jmx:rmi:///jndi/rmi://" +host + ":" + port + "/JMXConnector" ) ;
     }
     public static InstanceProperties createInstanceProperties(String host,
             String port, String user, String password, String displayName)
             throws InstanceCreationException
     {
         
-        return InstanceProperties.createInstanceProperties(
-                "deployer:geronimo:jmx:rmi:///jndi/rmi://" +
-                host + ":" + port + "/JMXConnector",
-                user, password, displayName) ;
+        return InstanceProperties.createInstanceProperties( "deployer:geronimo:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/JMXConnector", user, password, displayName) ;
     }
     
     /**

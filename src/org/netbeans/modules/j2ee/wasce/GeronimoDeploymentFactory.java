@@ -49,6 +49,7 @@ import org.openide.util.NbBundle;
 /**
  *
  * @author John Platts
+ * changed by Daniel Gomes 11/2011
  */
 public class GeronimoDeploymentFactory implements DeploymentFactory
 {
@@ -59,14 +60,10 @@ public class GeronimoDeploymentFactory implements DeploymentFactory
     public static final String PASSWORD_ATTR = "password";
     public static final String SERVER_NAME_ATTR = "serverName";
 
-    public static final String GERONIMO_URI_START =
-            "deployer:geronimo:jmx:rmi:///jndi/rmi:" ;
-    public static final int GERONIMO_URI_START_LENGTH =
-            GERONIMO_URI_START.length() ;
-    public static final String GERONIMO_URI_END =
-            "/JMXConnector" ;
-    public static final int GERONIMO_URI_END_LENGTH =
-            GERONIMO_URI_END.length() ;
+    public static final String GERONIMO_URI_START ="deployer:geronimo:jmx:rmi:///jndi/rmi:" ;
+    public static final int GERONIMO_URI_START_LENGTH =GERONIMO_URI_START.length() ;
+    public static final String GERONIMO_URI_END ="/JMXConnector" ;
+    public static final int GERONIMO_URI_END_LENGTH = GERONIMO_URI_END.length() ;
     
     private GeronimoDeploymentFactory() {}
     
@@ -95,13 +92,11 @@ public class GeronimoDeploymentFactory implements DeploymentFactory
     }
 
     public String getDisplayName() {
-        return NbBundle.getMessage(GeronimoDeploymentFactory.class,
-                "TXT_DisplayName") ;
+        return NbBundle.getMessage(GeronimoDeploymentFactory.class,"TXT_DisplayName") ;
     }
 
     public String getProductVersion() {
-        return NbBundle.getMessage(GeronimoDeploymentFactory.class,
-                "TXT_productVersion") ;
+        return NbBundle.getMessage(GeronimoDeploymentFactory.class, "TXT_productVersion") ;
     }
 
 }

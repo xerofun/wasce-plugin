@@ -102,6 +102,7 @@ public class GeronimoTailer extends Thread {
     public GeronimoTailer(File file, String ioPanelName) {
         // save the parameters
         this.file = file;
+        
         this.io = IOProvider.getDefault().getIO(ioPanelName, false);        
     }
     
@@ -123,16 +124,19 @@ public class GeronimoTailer extends Thread {
      */
     @Override
     public void run() {
-        if(isIOPanelOpen.containsKey(io)) {
-            return;
-        }
+//        if(isIOPanelOpen.containsKey(io)) {
+//           
+//            return;
+//        }
         
         isIOPanelOpen.put(io, new Object());
         try {            
-            
-            if(io.isClosed()) {                
-                io.getOut().reset();
-            }            
+             io.getOut().reset();
+//            if(io.isClosed()) {                
+//               
+//            }else{
+//                
+//            }            
             this.io.select();
             
             // check the source for the tailing, if it is a file we create a

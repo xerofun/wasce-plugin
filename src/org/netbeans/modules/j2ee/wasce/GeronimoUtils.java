@@ -161,7 +161,7 @@ public final class GeronimoUtils
     public static boolean isValidGeronimoURI(String uri) {
         // Format of Geronimo URI:
         // deployer:geronimo:jmx:rmi:///jndi/rmi:[//host[:port]]/JMXConnector
-        System.out.println("Valor URI from isValidGeronimoURI="+uri);
+        System.out.println("Valor URI from isValidGeronimoURI = "+uri);
         if(!uri.startsWith(GeronimoDeploymentFactory.GERONIMO_URI_START))
         {
             // URI does not begin with deployer:geronimo:jmx:rmi:///jndi/rmi:
