@@ -160,7 +160,7 @@ public class GeronimoStartServer extends StartServer {
                 if(!isRunning()) {
                    // serverProgress.notifyStart(StateType.RUNNING,"") ;
                   //  dserverProgress.changeState(StateType.FAILED, "An error occurred while executing the geronimo command.");
-                  fireStateChange(StateType.FAILED, "MSG_StartServerTimeout");
+                  fireStateChange(StateType.RUNNING, "MSG_StartServerTimeout");
                 }
                 else
                 {
@@ -244,10 +244,10 @@ public class GeronimoStartServer extends StartServer {
     }
     
     private class GeronimoStopRunnable implements Runnable {
-        private GeronimoServerProgress serverProgress ;
+        private GeronimoProgressObject serverProgress ;
         private String serverRoot ;
         
-        public GeronimoStopRunnable(GeronimoServerProgress serverProgress) {
+        public GeronimoStopRunnable(/*GeronimoServerProgress*/GeronimoProgressObject serverProgress) {
             this.serverProgress = serverProgress ;
             serverRoot = dm.getServerRoot() ;
         }
@@ -259,10 +259,8 @@ public class GeronimoStartServer extends StartServer {
             
             if((commandFile == null) || (!commandFile.exists()))
             {
-                serverProgress.notify(
-                        new GeronimoDeploymentStatus(ActionType.EXECUTE,
-                        CommandType.STOP, StateType.FAILED,
-                        "The geronimo command file was not found."));
+               serverProgress.changeState(StateType.FAILED, "The geronimo command file was not found.");
+               //serverProgress.notify( new GeronimoDeploymentStatus(ActionType.EXECUTE, CommandType.STOP, StateType.FAILED, "The geronimo command file was not found."));
                 return ;
             }
             
@@ -279,20 +277,29 @@ public class GeronimoStartServer extends StartServer {
             }
             catch(IOException e)
             {
-                serverProgress.notify(
-                        new GeronimoDeploymentStatus(ActionType.EXECUTE,
-                        CommandType.STOP, StateType.FAILED,
-                        "An error occurred while executing the geronimo command."));
+                serverProgress.changeState(StateType.FAILED, "An error occurred while executing the geronimo command.");
+//                serverProgress.notify( new GeronimoDeploymentStatus(ActionType.EXECUTE,CommandType.STOP, StateType.FAILED,"An error occurred while executing the geronimo command."));
                 return ;
             }
             
+             GeronimoTailer inputTailer = new GeronimoTailer(process.getInputStream(),dm.getServerTitleMessage()) ;
+            inputTailer.start() ;
+            GeronimoTailer logTailer = new GeronimoTailer(
+                    GeronimoUtils.getGeronimoLog(serverRoot),
+                    NbBundle.getMessage(GeronimoStartServer.class,
+                            "TXT_logWindowTitle", dm.getServerTitleMessage())) ;
+            logTailer.start() ;
+            geronimoServerProcess = process ;
+            
             while(System.currentTimeMillis() - start < STOP_TIMEOUT) {
                 if(isRunning()) {
-                    serverProgress.notifyStop(StateType.RUNNING, "") ;
+                    fireStateChange(StateType.RUNNING, "MSG_StopServerInProgress");
+
+                   // serverProgress.notifyStop(StateType.RUNNING, "") ;
                 }
                 else
                 {
-                    serverProgress.notifyStop(StateType.COMPLETED, "") ;
+                   fireStateChange(StateType.COMPLETED, "MSG_ServerStopped");
                     
                     state = STATE_STOPPED;
                     
@@ -304,20 +311,31 @@ public class GeronimoStartServer extends StartServer {
                 } catch(InterruptedException e) {}
             }
             
-            serverProgress.notifyStop(StateType.FAILED, "");
+            //serverProgress.notifyStop(StateType.FAILED, "");
+            fireStateChange(StateType.FAILED, "MSG_StoptServerTimeout");
             process.destroy();
             
             state = STATE_STARTED;
+        }
+        private void fireStateChange(StateType stateType, String msgKey, String... msgParams) {
+            InstanceProperties ip = dm.getInstanceProperties();
+            final String serverName = ip.getProperty(InstanceProperties.DISPLAY_NAME_ATTR);
+            String msg = NbBundle.getMessage(GeronimoStartServer.class, msgKey, serverName, msgParams);
+            serverProgress.changeState(stateType, msg);
         }
         
     }
 
     @Override
     public ProgressObject stopDeploymentManager() {
-        GeronimoServerProgress serverProgress = new GeronimoServerProgress(this) ;
+        //GeronimoServerProgress serverProgress = new GeronimoServerProgress(this) ;
+        GeronimoProgressObject serverProgress = new GeronimoProgressObject(this) ;
+        //serverProgress.notifyStop(StateType.RUNNING, "") ;
+        String serverName = dm.getInstanceProperties().getProperty(dm.getServerName());
+        String msg = NbBundle.getMessage(GeronimoStartServer.class, "MSG_StopServerInProgress", serverName);
+        serverProgress.changeState(StateType.RUNNING, msg);
         
-        serverProgress.notifyStop(StateType.RUNNING, "") ;
-        
+                
         if(state == STATE_STARTING) {
             for(int i = 0; i < START_TIMEOUT; i += START_DELAY) {
                 if(state == STATE_STARTING) {

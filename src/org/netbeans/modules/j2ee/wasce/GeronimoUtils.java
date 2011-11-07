@@ -68,6 +68,8 @@ public final class GeronimoUtils
 
     private static final String DEPLOYMENTFACTORY_KEY =
            "J2EE-DeploymentFactory-Implementation-Class" ;
+    //org.apache.geronimo.deployment.plugin.factories.DeploymentFactoryBootstrapper
+    //org.apache.geronimo.deployment.plugin.factories.DeploymentFactoryImpl
     
     public static GeronimoClassLoader getGeronimoClassLoader(String serverRoot)
     {
@@ -98,23 +100,17 @@ public final class GeronimoUtils
         }
         finally
         {
-            jarFile.close() ;
+           // jarFile.close() ;
         }
     }
     
-    private static DeploymentFactory createGeronimoDeploymentFactory(String serverRoot)
-            throws IOException, ClassNotFoundException, InstantiationException,
-                   IllegalAccessException
-    {
-        GeronimoClassLoader classLoader =
-                getGeronimoClassLoader(serverRoot) ;
+    private static DeploymentFactory createGeronimoDeploymentFactory(String serverRoot) throws IOException, ClassNotFoundException, InstantiationException,IllegalAccessException    {
+        GeronimoClassLoader classLoader =  getGeronimoClassLoader(serverRoot) ;
         
         classLoader.updateLoader() ;
-        try
-        {
+        //try{
             String deploymentFactoryClassName = null ;
-            deploymentFactoryClassName =
-                    getDeploymentFactoryImplClassName(serverRoot) ;
+            deploymentFactoryClassName =  getDeploymentFactoryImplClassName(serverRoot) ;
 
             if(deploymentFactoryClassName == null)
             {
@@ -122,8 +118,8 @@ public final class GeronimoUtils
             }
 
             Class deploymentFactory ;
-            deploymentFactory =
-                    Class.forName(serverRoot, true, classLoader) ;
+            //deploymentFactory = Class.forName(serverRoot, true, classLoader) ;
+            deploymentFactory = Class.forName(deploymentFactoryClassName, true, classLoader) ;
 
             Object deploymentFactoryInstance = deploymentFactory.newInstance() ;
 
@@ -136,27 +132,23 @@ public final class GeronimoUtils
             {
                 return null ;
             }
-        }
+        //}
 //catch(Exception ex ){
 //            ex.printStackTrace();
 //            ex.getMessage();
 //            return null;
 //        }
-        finally
-        {
-            classLoader.restoreLoader();
-        }
+//        finally
+//        {
+////            classLoader.restoreLoader();
+//        }
     }
     private static Map<String, DeploymentFactory>
             serverRootToDeploymentFactoryHashMap =
             Collections.synchronizedMap(new HashMap<String, DeploymentFactory>()) ;
     
-    public static DeploymentFactory getGeronimoDeploymentFactory(String serverRoot)
-            throws IOException, ClassNotFoundException, InstantiationException,
-                   IllegalAccessException
-    {
-        DeploymentFactory deploymentFactory =
-                serverRootToDeploymentFactoryHashMap.get(serverRoot) ;
+    public static DeploymentFactory getGeronimoDeploymentFactory(String serverRoot) throws IOException, ClassNotFoundException,InstantiationException,IllegalAccessException{
+        DeploymentFactory deploymentFactory = serverRootToDeploymentFactoryHashMap.get(serverRoot) ;
         
         if(deploymentFactory == null)
         {
@@ -169,6 +161,7 @@ public final class GeronimoUtils
     public static boolean isValidGeronimoURI(String uri) {
         // Format of Geronimo URI:
         // deployer:geronimo:jmx:rmi:///jndi/rmi:[//host[:port]]/JMXConnector
+        System.out.println("Valor URI from isValidGeronimoURI="+uri);
         if(!uri.startsWith(GeronimoDeploymentFactory.GERONIMO_URI_START))
         {
             // URI does not begin with deployer:geronimo:jmx:rmi:///jndi/rmi:

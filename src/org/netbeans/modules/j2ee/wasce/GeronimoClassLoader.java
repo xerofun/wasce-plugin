@@ -53,6 +53,7 @@ import java.util.Map;
 /**
  *
  * @author John Platts
+ * changed by Daniel Gomes, included new File(serverRoot + "/jsr88/") .
  */
 public class GeronimoClassLoader extends URLClassLoader
 {
@@ -83,7 +84,8 @@ public class GeronimoClassLoader extends URLClassLoader
         
         File[] directories = new File[]
         {
-            new File(serverRoot + "/lib/")
+            new File(serverRoot + "/lib/"),
+            new File(serverRoot + "/jsr88/")
         };
         
         for(int i = 0; i < directories.length; i++)
@@ -102,6 +104,7 @@ public class GeronimoClassLoader extends URLClassLoader
                     try
                     {
                         addURL(children[j].toURI().toURL()) ;
+                        System.out.println("Loading :"+children[j].toURI().toURL());
                     }
                     catch(MalformedURLException e)
                     {
@@ -124,6 +127,7 @@ public class GeronimoClassLoader extends URLClassLoader
     
     public synchronized void updateLoader()
     {
+        
         Thread currentThread = Thread.currentThread() ;
         
         if (!currentThread.getContextClassLoader().equals(this))

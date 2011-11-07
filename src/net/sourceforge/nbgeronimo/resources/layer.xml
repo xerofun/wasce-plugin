@@ -3,8 +3,10 @@
 <filesystem>
     <folder name="J2EE">
         <folder name="DeploymentPlugins">
-            <folder name="nbgeronimo">
-                <file name="Descriptor" url="nbdep.xml" />        
+            <folder name="wasce">                
+                <file name="Descriptor" url="nbdep.xml">
+                    <attr name="needsFindServerUI" stringvalue="true"/>
+                </file>
                 <file name="Factory.instance">
                     <attr name="instanceCreate" methodvalue="net.sourceforge.nbgeronimo.GeronimoDeploymentFactory.create" />
                     <attr name="instanceClass" stringvalue="net.sourceforge.nbgeronimo.GeronimoDeploymentFactory" />
@@ -27,6 +29,23 @@
                     <attr name="instanceClass" stringvalue="net.sourceforge.nbgeronimo.config.GeronimoModuleConfigurationFactory" />
                     <attr name="instanceOf" stringvalue="org.netbeans.modules.j2ee.deployment.plugins.spi.config.ModuleConfigurationFactory" />
                 </file>
+                <folder name="DeploymentFileNames">
+                    <folder name="WAR">
+                        <file name="WEB-INF\geronimo-web.xml"/>
+                    </folder>
+                    <folder name="EJB">
+                        <file name="META-INF\openejb.xml"/>
+                    </folder>
+                    <folder name="EAR">
+                        <file name="META-INF\geronimo-ear.xml"/>
+                    </folder> 
+                    <folder name="RAR">
+                        <file name="META-INF\geronimo-ra.xml"/>
+                    </folder>
+                    <folder name="CAR">
+                        <file name="META-INF\geronimo-client.xml"/>
+                    </folder>
+                </folder>
             </folder>
         </folder>
     </folder>

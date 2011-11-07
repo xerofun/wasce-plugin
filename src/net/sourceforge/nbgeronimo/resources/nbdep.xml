@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <netbeans-deployment>
-    <disconnected-string>deployer:geronimo:jmx:rmi:///jndi/rmi://localhost:1099/JMXConnector</disconnected-string>
+    <disconnected-string>deployer:geronimo:jmx</disconnected-string>
     
     <web-context-root>
         <xpath>/</xpath>

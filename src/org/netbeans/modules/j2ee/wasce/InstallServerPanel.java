@@ -80,6 +80,11 @@ public class InstallServerPanel extends javax.swing.JPanel {
         jLabel3.setText(org.openide.util.NbBundle.getMessage(InstallServerPanel.class, "InstallServerPanel.jLabel3.text")); // NOI18N
 
         jTextField2.setText(org.openide.util.NbBundle.getMessage(InstallServerPanel.class, "InstallServerPanel.jTextField2.text")); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText(org.openide.util.NbBundle.getMessage(InstallServerPanel.class, "InstallServerPanel.jLabel4.text")); // NOI18N
 
@@ -97,7 +102,6 @@ public class InstallServerPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +134,6 @@ public class InstallServerPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
@@ -171,6 +174,10 @@ public class InstallServerPanel extends javax.swing.JPanel {
             jTextField1.setText(chooser.getSelectedFile().getAbsolutePath());           
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
  private final FileFilter dirFileFilter = new FileFilter() {
         public boolean accept(File file) {
             return (file.exists() && file.isDirectory());

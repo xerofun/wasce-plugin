@@ -229,10 +229,12 @@ public class GeronimoDeploymentManager implements DeploymentManager {
         if (factory == null) {
             String serverRoot = getServerRoot();
             try {
-                factory = GeronimoUtils.getGeronimoDeploymentFactory(serverRoot);
+               factory = GeronimoUtils.getGeronimoDeploymentFactory(serverRoot);
+               // factory = GeronimoPluginUtils.getFactory(uri, this);
             } catch (IOException e) {
                 Logger.getLogger("global").log(Level.SEVERE, null, e);
             } catch (ClassNotFoundException e) {
+                Logger.getLogger("global").log(Level.SEVERE, null, e);
             } catch (InstantiationException e) {
                 Logger.getLogger("global").log(Level.SEVERE, null, e);
             } catch (IllegalAccessException e) {
@@ -243,7 +245,9 @@ public class GeronimoDeploymentManager implements DeploymentManager {
 
     private void updateDeploymentManager() {
         loadDeploymentFactory();
-
+          
+        System.out.println("updateLoader");
+        
         loader.updateLoader();
 
         try {
@@ -265,9 +269,10 @@ public class GeronimoDeploymentManager implements DeploymentManager {
             } catch (DeploymentManagerCreationException ex) {
                 Logger.getLogger("global").log(Level.SEVERE, null, ex);
             }
-        } finally {
-            loader.restoreLoader();
-        }
+        } 
+//        finally {
+//            loader.restoreLoader();
+//        }
     }
 
     public boolean getIsConnected() {
@@ -282,9 +287,12 @@ public class GeronimoDeploymentManager implements DeploymentManager {
     }
 
     public Target[] getTargets() throws IllegalStateException {
+        loader = GeronimoClassLoader.getInstance(getServerRoot());
+        
         updateDeploymentManager();
 
         if (!isConnected) {
+            System.out.println("Não conectado");
             throw new IllegalStateException(NbBundle.getMessage(
                     GeronimoDeploymentManager.class, "ERR_illegalState"));
         }
@@ -399,6 +407,7 @@ public class GeronimoDeploymentManager implements DeploymentManager {
 
         loader.updateLoader();
         try {
+            //return dm.distribute(target, stream., null)
             return dm.distribute(target, stream, stream2);
         } finally {
             loader.restoreLoader();
